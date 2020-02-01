@@ -5,7 +5,7 @@ To check whether each image is with the correct size, I find checking them one b
 Therefore, I wrote this program to let the computer check it automatically for me
 
 ## Usage
-```
+```go
 go build src/main.go
 ./main.exe
 ```
