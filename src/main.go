@@ -6,7 +6,9 @@ import (
 	"log"
 	"os"
 
+	_ "image/gif"
 	_ "image/jpeg"
+	_ "image/png"
 )
 
 //WIDTH is the width of each image you want
@@ -24,7 +26,7 @@ func main() {
 	}
 	defer file.Close()
 
-	flag := false // flag = true when detected wrong dimension
+	flag := false // flag = true when detected wrong format or dimension
 
 	// scan images one by one
 	imageList, _ := file.Readdirnames(0) // 0 to read all files and folders
@@ -37,11 +39,17 @@ func main() {
 		}
 
 		// decode the image
-		decodedImage, _, dImgErr := image.DecodeConfig(currentImage)
+		decodedImage, format, dImgErr := image.DecodeConfig(currentImage)
 		if dImgErr != nil {
 			log.Fatalf("Failed opening directory: %s", dImgErr)
 		}
 		// fmt.Println("Width:", decodedImage.Width, "Height:", decodedImage.Height)
+
+		// check format
+		if format != "jpeg" {
+			fmt.Println("Wrong format: " + name)
+			flag = true
+		}
 
 		// check dimension
 		if decodedImage.Width != WIDTH || decodedImage.Height != HEIGHT {
