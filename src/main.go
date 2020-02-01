@@ -58,8 +58,8 @@ func main() {
 		}
 	}
 
-	// print this message when all dimensions are correct
+	// print this message when all dimensions and foramts are correct
 	if flag == false {
-		fmt.Println("Dimension of all images are correct!")
+		fmt.Println("Dimensions and Formats of all images are correct!")
 	}
 }
